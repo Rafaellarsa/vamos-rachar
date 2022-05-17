@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Let\'s Split</string>
+    <string name="value">$</string>
+    <string name="people">People</string>
+    <string name="title">Let\'s Split!</string>
+    <string name="dividedValue">$ 0.00</string>
+    <string name="totalValue">Total value</string>
+    <string name="peopleNumber">Number of people</string>
+    <string name="share">Share result</string>
+    <string name="speak">Speak result</string>
+    <string name="valuePerPerson">"The value per person is "</string>
+    <string name="exchange">" dollars."</string>
+</resources>

@@ -16,12 +16,12 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener, TextToSpeech.OnInitListener {
-    private var valueInput:EditText? = null
-    private var peopleInput:EditText? = null
-    private var result:TextView? = null
-    private var share:FloatingActionButton? = null
-    private var speak:FloatingActionButton? = null
-    private var ttsPlayer:TextToSpeech? = null
+    private var valueInput: EditText? = null
+    private var peopleInput: EditText? = null
+    private var result: TextView? = null
+    private var share: FloatingActionButton? = null
+    private var speak: FloatingActionButton? = null
+    private var ttsPlayer: TextToSpeech? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,42 +47,36 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener, Tex
 
     override fun afterTextChanged(p0: Editable?) {
         try {
-            val value:Double = valueInput?.text.toString().toDouble()
-            val people:Int = peopleInput?.text.toString().toInt()
+            val value: Double = valueInput?.text.toString().toDouble()
+            val people: Int = peopleInput?.text.toString().toInt()
             val res = if (people == 0) value else value / people
             val df = DecimalFormat("#.00")
-            val formattedResult = "R$ " + df.format(res)
+            val formattedResult = getString(R.string.value) + " " + df.format(res)
             result?.text = formattedResult
-        } catch (e:Exception) {
-            val value = "R$ 0.00"
+        } catch (e: Exception) {
+            val value = getString(R.string.value) + " 0.00"
             result?.text = value
         }
     }
 
     override fun onClick(p0: View?) {
-        if(p0 == share) {
+        if (p0 == share) {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT, "O valor por pessoa é " + result?.text.toString() + " reais.")
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                getString(R.string.valuePerPerson) + result?.text.toString() + getString(R.string.exchange)
+            )
             startActivity(intent)
-        } else if(p0 == speak && ttsPlayer != null) {
-            ttsPlayer!!.speak("O valor por pessoa é " + result?.text.toString() + " reais.", TextToSpeech.QUEUE_FLUSH, null, "ID1")
+        } else if (p0 == speak && ttsPlayer != null) {
+            ttsPlayer!!.speak(
+                getString(R.string.valuePerPerson) + result?.text.toString() + getString(R.string.exchange),
+                TextToSpeech.QUEUE_FLUSH,
+                null,
+                "ID1"
+            )
         }
     }
 
-    override fun onInit(initStatus: Int) {
-        if (initStatus == TextToSpeech.SUCCESS) {
-            val result = ttsPlayer!!.setLanguage(Locale.US)
-            Toast.makeText(
-                this, "TTS ativado...",
-                Toast.LENGTH_LONG
-            ).show()
-        } else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(
-                this, "Sem TTS habilitado...",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
+    override fun onInit(initStatus: Int) {}
 }

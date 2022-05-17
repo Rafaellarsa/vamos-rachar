@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Vamos Rachar</string>
     <string name="title">Vamos Rachar!</string>
@@ -8,6 +9,6 @@
     <string name="peopleNumber">Número de pessoas</string>
     <string name="share">Compartilhar resultado</string>
     <string name="speak">Falar resultado</string>
-    <string name="valuePerPerson">O valor por pessoa é</string>
-    <string name="exchange">reais.</string>
+    <string name="valuePerPerson">"O valor por pessoa é "</string>
+    <string name="exchange">" reais."</string>
 </resources>

@@ -9,15 +9,13 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="325dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/title"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="65sp"
-        app:layout_constraintBottom_toTopOf="@+id/valueInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +27,6 @@
         android:id="@+id/valueInput"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/totalValue"
@@ -38,16 +35,27 @@
         android:textColorHint="@color/green_200"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/peopleInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/dividedValue"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
+        app:layout_constraintTop_toTopOf="@+id/valueInput" />
 
     <EditText
         android:id="@+id/peopleInput"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="@string/peopleNumber"
@@ -55,63 +63,41 @@
         android:textColor="@color/white"
         android:textColorHint="@color/green_200"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/resultTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/valueInput"
         app:layout_constraintTop_toBottomOf="@+id/valueInput" />
-
-    <TextView
-        android:id="@+id/resultTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/dividedValue"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="65sp"
-        app:layout_constraintBottom_toTopOf="@+id/speakButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/peopleInput" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/green_500"
         android:clickable="true"
         android:contentDescription="@string/share"
-        android:focusable="true"
         app:backgroundTint="@color/green_200"
         app:layout_constraintBottom_toBottomOf="@+id/speakButton"
         app:layout_constraintEnd_toStartOf="@+id/speakButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="45dp"
         app:srcCompat="?attr/actionModeShareDrawable"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:focusable="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/speakButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/green_500"
         android:clickable="true"
         android:contentDescription="@string/speak"
-        android:focusable="true"
         app:backgroundTint="@color/green_200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/shareButton"
-        app:layout_constraintTop_toBottomOf="@+id/resultTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/peopleInput"
+        app:layout_constraintEnd_toEndOf="@+id/resultTextView"
         app:maxImageSize="52dp"
         app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
