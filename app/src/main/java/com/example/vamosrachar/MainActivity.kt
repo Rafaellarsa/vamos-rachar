@@ -1,6 +1,5 @@
 package com.example.vamosrachar
 
-import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.text.Editable
@@ -55,22 +54,20 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener,
         return getString(R.string.value)
     }
 
+    override fun getMessageToUser(): String {
+        return getString(R.string.valuePerPerson) + result?.text.toString() + getString(R.string.exchange)
+    }
+
+    override fun getTtsPlayer(): TextToSpeech? {
+        return ttsPlayer
+    }
+
     override fun onClick(p0: View?) {
         if (p0 == share) {
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "text/plain"
-            intent.putExtra(
-                Intent.EXTRA_TEXT,
-                getString(R.string.valuePerPerson) + result?.text.toString() + getString(R.string.exchange)
-            )
+            val intent = presenter!!.getMessageIntent()
             startActivity(intent)
         } else if (p0 == speak && ttsPlayer != null) {
-            ttsPlayer!!.speak(
-                getString(R.string.valuePerPerson) + result?.text.toString() + getString(R.string.exchange),
-                TextToSpeech.QUEUE_FLUSH,
-                null,
-                "ID1"
-            )
+            presenter!!.speak()
         }
     }
 
