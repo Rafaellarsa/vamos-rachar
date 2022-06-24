@@ -8,20 +8,19 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.DecimalFormat
-import java.util.*
 
-
-class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener, TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener,
+    TextToSpeech.OnInitListener, Contract.View {
     private var valueInput: EditText? = null
     private var peopleInput: EditText? = null
     private var result: TextView? = null
     private var share: FloatingActionButton? = null
     private var speak: FloatingActionButton? = null
     private var ttsPlayer: TextToSpeech? = null
+
+    private var presenter: Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +32,8 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener, Tex
         share = findViewById(R.id.shareButton)
         speak = findViewById(R.id.speakButton)
 
+        presenter = Presenter(this, Model())
+
         valueInput?.addTextChangedListener(this)
         peopleInput?.addTextChangedListener(this)
         share?.setOnClickListener(this)
@@ -42,21 +43,16 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnClickListener, Tex
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     override fun afterTextChanged(p0: Editable?) {
-        try {
             val value: Double = valueInput?.text.toString().toDouble()
             val people: Int = peopleInput?.text.toString().toInt()
-            val res = if (people == 0) value else value / people
-            val df = DecimalFormat("#.00")
-            val formattedResult = getString(R.string.value) + " " + df.format(res)
-            result?.text = formattedResult
-        } catch (e: Exception) {
-            val value = getString(R.string.value) + " 0.00"
-            result?.text = value
-        }
+            result?.text = presenter!!.getResult(value, people)
+    }
+
+    override fun getCurrency(): String {
+        return getString(R.string.value)
     }
 
     override fun onClick(p0: View?) {
